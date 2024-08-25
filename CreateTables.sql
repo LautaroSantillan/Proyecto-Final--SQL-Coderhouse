@@ -1,64 +1,65 @@
-#Creación de la DB
-CREATE DATABASE ecommerce_coderhouse;
-USE ecommerce_coderhouse;
+DROP DATABASE IF EXISTS gameHub;
+# Creación de la base de datos
+CREATE DATABASE gameHub;
+USE gameHub;
 
-#Creación de las tablas
-CREATE TABLE MetodoPago (
-    ID_MetodoPago INT PRIMARY KEY AUTO_INCREMENT,
-    Tipo VARCHAR(50) NOT NULL
+# Creación de las tablas
+CREATE TABLE PaymentMethod (
+    ID_PaymentMethod INT PRIMARY KEY AUTO_INCREMENT,
+    Type VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE Cliente (
-    ID_Cliente INT PRIMARY KEY AUTO_INCREMENT,
-    Nombre VARCHAR(75) NOT NULL,
-    Apellido VARCHAR(75) NOT NULL,
+CREATE TABLE Customer (
+    ID_Customer INT PRIMARY KEY AUTO_INCREMENT,
+    FirstName VARCHAR(75) NOT NULL,
+    LastName VARCHAR(75) NOT NULL,
     DNI INT NOT NULL UNIQUE,
     Email VARCHAR(100) NOT NULL,
-    Ubicacion VARCHAR(100),
-    Telefono VARCHAR(20),
-    ID_MetodoPago INT,
-    FOREIGN KEY (ID_MetodoPago) REFERENCES MetodoPago(ID_MetodoPago)
+    Location VARCHAR(100),           -- Ubicacion
+    Phone VARCHAR(20),               -- Telefono
+    ID_PaymentMethod INT,
+    FOREIGN KEY (ID_PaymentMethod) REFERENCES PaymentMethod(ID_PaymentMethod)
 );
 
-CREATE TABLE Pedido (
-    ID_Pedido INT PRIMARY KEY AUTO_INCREMENT,
-    Fecha DATE NOT NULL,
-    Estado ENUM('Pendiente', 'Entregado') NOT NULL,
-    Monto_Total DECIMAL(10, 2) NOT NULL,
-    ID_Cliente INT,
-    FOREIGN KEY (ID_Cliente) REFERENCES Cliente(ID_Cliente)
+CREATE TABLE `Order` (
+    ID_Order INT PRIMARY KEY AUTO_INCREMENT,
+    OrderDate DATE NOT NULL,          				-- Fecha
+    State ENUM('Pending', 'Delivered') NOT NULL, 	-- Estado
+    TotalAmount DECIMAL(10, 2) NOT NULL, 			-- Monto_Total
+    ID_Customer INT,
+    FOREIGN KEY (ID_Customer) REFERENCES Customer(ID_Customer)
 );
 
-CREATE TABLE Plataforma (
-    ID_Plataforma INT PRIMARY KEY AUTO_INCREMENT,
-    Nombre_Plataforma VARCHAR(15) NOT NULL
+CREATE TABLE Platform (
+    ID_Platform INT PRIMARY KEY AUTO_INCREMENT,
+    PlatformName VARCHAR(15) NOT NULL   -- Nombre_Plataforma
 );
 
-CREATE TABLE Categoria (
-    ID_Categoria INT PRIMARY KEY AUTO_INCREMENT,
-    Nombre_Categoria VARCHAR(50) NOT NULL
+CREATE TABLE Category (
+    ID_Category INT PRIMARY KEY AUTO_INCREMENT,
+    CategoryName VARCHAR(50) NOT NULL  -- Nombre_Categoria
 );
 
-CREATE TABLE Videojuego (
-    ID_Videojuego INT PRIMARY KEY AUTO_INCREMENT,
-    Titulo VARCHAR(100) NOT NULL,
-    Descripcion VARCHAR(150) NOT NULL,
-    Fecha_Lanzamiento DATE,
-    Precio DECIMAL(10, 2) NOT NULL,
+CREATE TABLE VideoGame (
+    ID_VideoGame INT PRIMARY KEY AUTO_INCREMENT,
+    Title VARCHAR(100) NOT NULL,
+    Descriptions VARCHAR(150) NOT NULL,
+    ReleaseDate DATE,                  -- Fecha_Lanzamiento
+    Price DECIMAL(10, 2) NOT NULL,
     Stock INT NOT NULL,
-    ID_Plataforma INT,
-    ID_Categoria INT,
-    FOREIGN KEY (ID_Plataforma) REFERENCES Plataforma(ID_Plataforma),
-    FOREIGN KEY (ID_Categoria) REFERENCES Categoria(ID_Categoria)
+    ID_Platform INT,
+    ID_Category INT,
+    FOREIGN KEY (ID_Platform) REFERENCES Platform(ID_Platform),
+    FOREIGN KEY (ID_Category) REFERENCES Category(ID_Category)
 );
 
-CREATE TABLE DetallePedido (
-    ID_Detalle INT PRIMARY KEY AUTO_INCREMENT,
-    ID_Pedido INT,
-    ID_Videojuego INT,
-    Cantidad INT NOT NULL,
-    Precio_Unitario DECIMAL(10, 2) NOT NULL,
-    Subtotal DECIMAL(10, 2) AS (Cantidad * Precio_Unitario) STORED,
-    FOREIGN KEY (ID_Pedido) REFERENCES Pedido(ID_Pedido),
-    FOREIGN KEY (ID_Videojuego) REFERENCES Videojuego(ID_Videojuego)
+CREATE TABLE OrderDetail (
+    ID_OrderDetail INT PRIMARY KEY AUTO_INCREMENT,
+    ID_Order INT,
+    ID_VideoGame INT,
+    Quantity INT NOT NULL,             -- Cantidad
+    UnitPrice DECIMAL(10, 2) NOT NULL, -- Precio_Unitario
+    Subtotal DECIMAL(10, 2) AS (Quantity * UnitPrice) STORED,
+    FOREIGN KEY (ID_Order) REFERENCES `Order`(ID_Order),
+    FOREIGN KEY (ID_VideoGame) REFERENCES VideoGame(ID_VideoGame)
 );

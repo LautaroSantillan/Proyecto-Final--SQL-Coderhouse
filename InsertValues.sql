@@ -1,43 +1,43 @@
 #Inserción de datos a la DB
-USE ecommerce_coderhouse;
+USE gamehub;
 
-INSERT INTO MetodoPago (Tipo) VALUES 
-('Tarjeta de crédito'),
-('Tarjeta de débito'),
-('Transferencia bancaria'),
+INSERT INTO PaymentMethod (Type) VALUES 
+('Credit Card'),
+('Debit Card'),
+('Bank Transfer'),
 ('PayPal'),
-('Efectivo');
+('Cash');
 
-INSERT INTO Plataforma (Nombre_Plataforma) VALUES ('PC');
-INSERT INTO Plataforma (Nombre_Plataforma) VALUES ('PlayStation');
-INSERT INTO Plataforma (Nombre_Plataforma) VALUES ('XBOX');
+INSERT INTO Platform (PlatformName) VALUES ('PC');
+INSERT INTO Platform (PlatformName) VALUES ('PlayStation');
+INSERT INTO Platform (PlatformName) VALUES ('XBOX');
 
-INSERT INTO Categoria (Nombre_Categoria) VALUES 
-('Acción'),
-('Aventura'),
+INSERT INTO Category (CategoryName) VALUES 
+('Action'),
+('Adventure'),
 ('Arcade'),
-('Deportivo'),
-('Estrategia'),
-('Simulación'),
+('Sports'),
+('Strategy'),
+('Simulation'),
 ('RPG');
 
-INSERT INTO Videojuego (Titulo, Descripcion, Fecha_Lanzamiento, Precio, Stock, ID_Plataforma, ID_Categoria) VALUES 
-('Grand Theft Auto V', 'Es un videojuego de acción de mundo abierto desarrollado por Rockstar Games.', '2013-09-17', 29.99, 50, 2, 1),
-('Star Wars: Outlaws', 'Próximo videojuego de mundo abierto y de acción lanzado por Ubisoft.', '2024-08-30', 70, 250, 1, 1),
-('Red Dead Redemption 2', 'Videojuego de aventura de mundo abierto con temática del Salvaje Oeste desarrollado por Rockstar Games.', '2019-12-05', 59.99, 75, 2, 2),
-('Minecraft', 'Es un videojuego de construcción de tipo sandbox creado por Mojang Studios.', '2011-11-18', 12.75, 15, 3, 2),
-('Pac-Man', 'Videojuego arcade creado por el diseñador de videojuegos Toru Iwatani de la empresa Namco', '1980-05-22', 2.49, 10, 1, 3),
-('Tetris', 'Es un videojuego de lógica soviético originalmente diseñado y programado por Alekséi Pázhitnov.', '1984-06-06', 1.25, 5, 1, 3),
-('F1® 24', 'Videojuego de carreras publicado por EA Sports. Es la 17ª entrega de la serie F1.', '2024-05-31', 52.99, 80, 2, 4),
-('NBA 2K25', 'Próximo videojuego de baloncesto, basado en la NBA​. Es la 25ª entrega de la franquicia NBA 2K​.', '2024-09-06', 59.99, 50, 1, 4),
-('Hearts of Iron IV', 'Videojuego de estrategia bélica compleja desarrollado por Paradox Development Studio.', '2014-06-06', 29.99, 30, 1, 5),
-('Age of Empires II: Definitive Edition', 'Es un videojuego de estrategia publicado por Xbox Game Studios.', '2019-11-14', 9.99, 18, 3, 5),
-('EA SPORTS FC™ 25', 'Próximo videojuego de fútbol por Electronic Arts. Será la 32ª entrega de los juegos de simulación de fútbol.', '2024-09-27', 75, 500, 2, 6),
-('Euro Truck Simulator 2', 'Viaja por Europa como el rey de la carretera, un camionero que entrega carga importante a través de distancias impresionantes.', '2018-10-18', 10.09, 30, 1, 6),
-('Baldur´s Gate 3', 'Videojuego de rol desarrollado por Larian Studios. Representa la tercera entrega principal de la serie Baldur´s Gate.', '2023-08-03', 34.50, 125, 2, 7),
-('Elden Ring', 'Es un videojuego de rol de acción desarrollado por FromSoftware.', '2023-02-24', 47.99, 115, 1, 7);
+INSERT INTO VideoGame (Title, Descriptions, ReleaseDate, Price, Stock, ID_Platform, ID_Category) VALUES 
+('Grand Theft Auto V', 'Open-world action game developed by Rockstar Games.', '2013-09-17', 29.99, 50, 2, 1),
+('Star Wars: Outlaws', 'Upcoming open-world action game released by Ubisoft.', '2024-08-30', 70, 250, 1, 1),
+('Red Dead Redemption 2', 'Open-world adventure game set in the Wild West, developed by Rockstar Games.', '2019-12-05', 59.99, 75, 2, 2),
+('Minecraft', 'Sandbox construction game developed by Mojang Studios.', '2011-11-18', 12.75, 15, 3, 2),
+('Pac-Man', 'Arcade game created by Toru Iwatani of Namco', '1980-05-22', 2.49, 10, 1, 3),
+('Tetris', 'Soviet logic game originally designed by Alexey Pajitnov.', '1984-06-06', 1.25, 5, 1, 3),
+('F1® 24', 'Racing game published by EA Sports. It is the 17th installment in the F1 series.', '2024-05-31', 52.99, 80, 2, 4),
+('NBA 2K25', 'Upcoming basketball game based on the NBA. It is the 25th installment of the NBA 2K franchise.', '2024-09-06', 59.99, 50, 1, 4),
+('Hearts of Iron IV', 'Complex war strategy game developed by Paradox Development Studio.', '2014-06-06', 29.99, 30, 1, 5),
+('Age of Empires II: Definitive Edition', 'Strategy game published by Xbox Game Studios.', '2019-11-14', 9.99, 18, 3, 5),
+('EA SPORTS FC™ 25', 'Upcoming football game by Electronic Arts. It will be the 32nd installment in the football simulation series.', '2024-09-27', 75, 500, 2, 6),
+('Euro Truck Simulator 2', 'Travel across Europe as a king of the road, a trucker delivering important cargo over impressive distances.', '2018-10-18', 10.09, 30, 1, 6),
+('Baldur´s Gate 3', 'RPG developed by Larian Studios. It is the third main installment in the Baldur´s Gate series.', '2023-08-03', 34.50, 125, 2, 7),
+('Elden Ring', 'Action RPG developed by FromSoftware.', '2023-02-24', 47.99, 115, 1, 7);
 
-INSERT INTO Cliente (Nombre, Apellido, DNI, Email, Ubicacion, Telefono, ID_MetodoPago) VALUES 
+INSERT INTO Customer (FirstName, LastName, DNI, Email, Location, Phone, ID_PaymentMethod) VALUES 
 ('Lautaro', 'Santillan', 45175053, 'santillanlautaro03@gmail.com', 'Buenos Aires', '11 6579-9996', 2),
 ('Juan', 'Pérez', 12345678, 'juan.perez@example.com', 'Buenos Aires', '15 1234-5678', 1),
 ('Maria', 'Gómez', 87654321, 'maria.gomez@example.com', 'Córdoba', '8765-4321', 2),
@@ -49,19 +49,19 @@ INSERT INTO Cliente (Nombre, Apellido, DNI, Email, Ubicacion, Telefono, ID_Metod
 ('Lucía', 'Ramírez', 66778899, 'lucia.ramirez@example.com', 'Santa Fe', '6677-8899', 3),
 ('Javier', 'Roldán', 43129004, 'javier.roldan@example.com', 'Rosario', '3456-7890', 1);
 
-INSERT INTO Pedido (Fecha, Estado, Monto_Total, ID_Cliente) VALUES
-('2024-08-04', 'Entregado', 112.98, 1),
-('2024-08-05', 'Entregado', 89.98, 2),
-('2024-08-06', 'Pendiente', 70.00, 3),
-('2024-08-07', 'Entregado', 15.24, 4),
-('2024-08-07', 'Pendiente', 1.25, 5),
-('2024-08-08', 'Entregado', 52.99, 6),
-('2024-08-08', 'Pendiente', 59.99, 7),
-('2024-08-09', 'Entregado', 39.98, 8),
-('2024-08-09', 'Pendiente', 75.00, 9),
-('2024-08-10', 'Pendiente', 34.50, 10);
+INSERT INTO `Order` (OrderDate, State, TotalAmount, ID_Customer) VALUES
+('2024-08-04', 'Delivered', 112.98, 1),
+('2024-08-05', 'Delivered', 89.98, 2),
+('2024-08-06', 'Pending', 70.00, 3),
+('2024-08-07', 'Delivered', 15.24, 4),
+('2024-08-07', 'Pending', 1.25, 5),
+('2024-08-08', 'Delivered', 52.99, 6),
+('2024-08-08', 'Pending', 59.99, 7),
+('2024-08-09', 'Delivered', 39.98, 8),
+('2024-08-09', 'Pending', 75.00, 9),
+('2024-08-10', 'Pending', 34.50, 10);
 
-INSERT INTO DetallePedido (ID_Pedido, ID_Videojuego, Cantidad, Precio_Unitario) VALUES
+INSERT INTO OrderDetail (ID_Order, ID_VideoGame, Quantity, UnitPrice) VALUES
 (1, 3, 1, 59.99),
 (1, 7, 1, 52.99),
 (2, 1, 1, 29.99),
