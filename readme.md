@@ -38,7 +38,6 @@ GameHub es un ecommerce dedicado a la venta de videojuegos para diversas consola
 
 ## Diagrama Entidad-Relación (DER)
 
-```
    +---------------------+                 +---------------------+
    |	PAYMENT_METHOD   |                 |	  CUSTOMER       |
    +---------------------+                 +---------------------+
@@ -65,8 +64,7 @@ GameHub es un ecommerce dedicado a la venta de videojuegos para diversas consola
    +-----------------+    |---|---> | ID_Category FK  |            | UnitPrice	       |
    |  ID_Platform PK |--------|     +-----------------+		       | Subtotal	       |
    |  PlatformName   |						                       +-------------------+
-   +-----------------+	
-```
+   +-----------------+
 
 ## Listado de tablas y descripcion
 ### PaymentMethod
