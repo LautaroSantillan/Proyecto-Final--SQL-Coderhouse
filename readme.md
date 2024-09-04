@@ -38,33 +38,35 @@ GameHub es un ecommerce dedicado a la venta de videojuegos para diversas consola
 
 ## Diagrama Entidad-Relación (DER)
 
-   +---------------------+                 +---------------------+
-   |	PAYMENT_METHOD   |                 |	  CUSTOMER       |
-   +---------------------+                 +---------------------+
-   | ID_PaymentMethod PK |----|            | ID_Customer PK      |----|
-   | Type                |    |            | FirstName           |    |
-   +---------------------+    |            | LastName            |    |    +----------------+
-                              |            | DNI                 |    |	   |     ORDER      |
-        		              |		       | Email               |    |    +----------------+
-                              |            | Location            |    |	   | ID_Order PK    |---|
-       			              |		       | Phone               |    |	   | OrderDate      |	|
-                              |----------->| ID_PaymentMethod FK |    |	   | State	        |	|
-                             		       +---------------------+    |    | TotalAmount    |	|
-           							                                  |--> | ID_Customer FK |	|
-                                    +-----------------+                    +----------------+	|
-   +-----------------+              |	 VIDEOGAME    | 					                    |
-   |	CATEGORY     |              +-----------------+      					                |
-   +-----------------+              | ID_VideoGame PK |-----|      +-------------------+    	|
-   | ID_Category PK  |----|         | Title           |     |      |    ORDER_DETAIL   |	    |
-   | CategoryName    |	  |	        | Descriptions    |     |      +-------------------+	    |
-   +-----------------+	  |	        | ReleaseDate     |	    |	   | ID_OrderDetail PK |	    |
-                          |         | Price           |     |      | ID_Order FK       |<-------|
-   +-----------------+    |         | Stock           |     |----> | ID_VideoGame FK   |
-   | 	PLATFORM     |    |   |---> | ID_Platform FK  |            | Quantity          |
-   +-----------------+    |---|---> | ID_Category FK  |            | UnitPrice	       |
-   |  ID_Platform PK |--------|     +-----------------+		       | Subtotal	       |
-   |  PlatformName   |						                       +-------------------+
-   +-----------------+
+```
+   +---------------------+            +---------------------+
+   |	PAYMENT_METHOD   |            |	     CUSTOMER       |
+   +---------------------+            +---------------------+
+   | ID_PaymentMethod PK |----|         | ID_Customer PK    |--|
+   | Type                |    |       | FirstName           |  |
+   +---------------------+    |       | LastName            |  |    +----------------+
+                              |       | DNI                 |  |	|     ORDER      |
+        		              |		  | Email               |  |    +----------------+
+                              |       | Location            |  |	| ID_Order PK    |--|
+       			              |		  | Phone               |  |	| OrderDate      |	|
+                              |------>| ID_PaymentMethod FK |  |	| State	         |	|
+                             		  +---------------------+  |    | TotalAmount    |	|
+           							                           |--> | ID_Customer FK |	|
+                                    +-----------------+             +----------------+	|
+   +-----------------+              |	 VIDEOGAME    | 					            |
+   |	CATEGORY     |              +-----------------+      					        |
+   +-----------------+              | ID_VideoGame PK |--|    +-------------------+     |
+   | ID_Category PK  |----|         | Title           |  |    |    ORDER_DETAIL   |	    |
+   | CategoryName    |	  |	        | Descriptions    |  |    +-------------------+	    |
+   +-----------------+	  |	        | ReleaseDate     |	 |	  | ID_OrderDetail PK |	    |
+                          |         | Price           |  |    | ID_Order FK       |<----|
+   +-----------------+    |         | Stock           |  |--> | ID_VideoGame FK   |
+   | 	PLATFORM     |    |   |---> | ID_Platform FK  |       | Quantity          |
+   +-----------------+    |---|---> | ID_Category FK  |       | UnitPrice	      |
+   |  ID_Platform PK |--------|     +-----------------+		  | Subtotal	      |
+   |  PlatformName   |						                  +-------------------+
+   +-----------------+	
+```
 
 ## Listado de tablas y descripcion
 ### PaymentMethod
