@@ -1,5 +1,5 @@
 <center>
-<img src="https://objetivo.news/download/multimedia.normal.bcba10cea1861629.Y29kZXJob3VzZS1xdWUtZXMtcXVlLWhhY2VuX25vcm1hbC53ZWJw.webp" style="width: 100% ; aspect-ratio:16/9">
+<img src="https://objetivo.news/download/multimedia.normal.bcba10cea1861629.Y29kZXJob3VzZS1xdWUtZXMtcXVlLWhhY2VuX25vcm1hbC53ZWJw.webp" style="width: 100%; aspect-ratio:16/9">
 </center>
 
 # <center>Entrega de proyecto final - GameHub - Video Game Ecommerce Database</center>
@@ -38,35 +38,9 @@ GameHub es un ecommerce dedicado a la venta de videojuegos para diversas consola
 
 ## Diagrama Entidad-Relación (DER)
 
-```
-   +---------------------+            +---------------------+
-   |	PAYMENT_METHOD   |            |	     CUSTOMER       |
-   +---------------------+            +---------------------+
-   | ID_PaymentMethod PK |----|         | ID_Customer PK    |--|
-   | Type                |    |       | FirstName           |  |
-   +---------------------+    |       | LastName            |  |    +----------------+
-                              |       | DNI                 |  |	|     ORDER      |
-        		              |		  | Email               |  |    +----------------+
-                              |       | Location            |  |	| ID_Order PK    |--|
-       			              |		  | Phone               |  |	| OrderDate      |	|
-                              |------>| ID_PaymentMethod FK |  |	| State	         |	|
-                             		  +---------------------+  |    | TotalAmount    |	|
-           							                           |--> | ID_Customer FK |	|
-                                    +-----------------+             +----------------+	|
-   +-----------------+              |	 VIDEOGAME    | 					            |
-   |	CATEGORY     |              +-----------------+      					        |
-   +-----------------+              | ID_VideoGame PK |--|    +-------------------+     |
-   | ID_Category PK  |----|         | Title           |  |    |    ORDER_DETAIL   |	    |
-   | CategoryName    |	  |	        | Descriptions    |  |    +-------------------+	    |
-   +-----------------+	  |	        | ReleaseDate     |	 |	  | ID_OrderDetail PK |	    |
-                          |         | Price           |  |    | ID_Order FK       |<----|
-   +-----------------+    |         | Stock           |  |--> | ID_VideoGame FK   |
-   | 	PLATFORM     |    |   |---> | ID_Platform FK  |       | Quantity          |
-   +-----------------+    |---|---> | ID_Category FK  |       | UnitPrice	      |
-   |  ID_Platform PK |--------|     +-----------------+		  | Subtotal	      |
-   |  PlatformName   |						                  +-------------------+
-   +-----------------+	
-```
+<center>
+<img src="./assets/DER.jpg" style="width: 100%; aspect-ratio:16/9">
+</center>
 
 ## Listado de tablas y descripcion
 ### PaymentMethod
