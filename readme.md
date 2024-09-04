@@ -36,6 +36,38 @@ El proyecto aborda el diseño y desarrollo de una base de datos para GameHub, un
 ## Modelo de negocio
 GameHub es un ecommerce dedicado a la venta de videojuegos para diversas consolas y PC, ofreciendo una amplia gama de títulos en distintas categorías y plataformas. El modelo de negocio de GameHub es de tipo B2C, ya que los clientes pueden comprar productos directamente desde la página web, sin la necesidad de un intermediario.
 
+## Diagrama Entidad-Relación (DER)
+
+```
+   +---------------------+                 +---------------------+
+   |	PAYMENT_METHOD   |                 |	  CUSTOMER       |
+   +---------------------+                 +---------------------+
+   | ID_PaymentMethod PK |----|            | ID_Customer PK      |----|
+   | Type                |    |            | FirstName           |    |
+   +---------------------+    |            | LastName            |    |    +----------------+
+                              |            | DNI                 |    |	   |     ORDER      |
+        		              |		       | Email               |    |    +----------------+
+                              |            | Location            |    |	   | ID_Order PK    |---|
+       			              |		       | Phone               |    |	   | OrderDate      |	|
+                              |----------->| ID_PaymentMethod FK |    |	   | State	        |	|
+                             		       +---------------------+    |    | TotalAmount    |	|
+           							                                  |--> | ID_Customer FK |	|
+                                    +-----------------+                    +----------------+	|
+   +-----------------+              |	 VIDEOGAME    | 					                    |
+   |	CATEGORY     |              +-----------------+      					                |
+   +-----------------+              | ID_VideoGame PK |-----|      +-------------------+    	|
+   | ID_Category PK  |----|         | Title           |     |      |    ORDER_DETAIL   |	    |
+   | CategoryName    |	  |	        | Descriptions    |     |      +-------------------+	    |
+   +-----------------+	  |	        | ReleaseDate     |	    |	   | ID_OrderDetail PK |	    |
+                          |         | Price           |     |      | ID_Order FK       |<-------|
+   +-----------------+    |         | Stock           |     |----> | ID_VideoGame FK   |
+   | 	PLATFORM     |    |   |---> | ID_Platform FK  |            | Quantity          |
+   +-----------------+    |---|---> | ID_Category FK  |            | UnitPrice	       |
+   |  ID_Platform PK |--------|     +-----------------+		       | Subtotal	       |
+   |  PlatformName   |						                       +-------------------+
+   +-----------------+	
+```
+
 ## Listado de tablas y descripcion
 ### PaymentMethod
 | Column Name      | Data Type   | Description                             |
