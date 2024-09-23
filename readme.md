@@ -104,6 +104,14 @@ GameHub es un ecommerce dedicado a la venta de videojuegos para diversas consola
 | UnitPrice        | DECIMAL(10,2)| Unit price of the video game.           |
 | Subtotal         | DECIMAL(10,2)| Calculated as Quantity * UnitPrice.     |
 
+### StockAudit
+| Column Name      | Data Type   | Description                              |
+|------------------|-------------|------------------------------------------|
+| ID_Audit         | INT         | Primary key. Unique identifier for the order detail. |
+| ID_VideoGame     | INT         | Foreign key referencing VideoGame.       |
+| DateStUp         | DATETIME    | Date of the stock update.                |
+| OldStock         | INT         | Stock of the video game before audit.    |
+| NewStock         | INT         | Stock of the video game after audit.     |
 
 ## Estructura e ingesta de datos
 * Se realiza principalmente por medio del archivo population.sql

@@ -3,12 +3,13 @@ USE gamehub;
 
 --
 
+DROP TABLE IF EXISTS StockAudit;
 CREATE TABLE StockAudit (
     ID_Audit INT PRIMARY KEY AUTO_INCREMENT,
     ID_VideoGame INT,
-    Fecha DATETIME,
-    StockAnterior INT,
-    StockNuevo INT,
+    DateStUp DATETIME,
+    OldStock INT,
+    NewStock INT,
     FOREIGN KEY (ID_VideoGame) REFERENCES VideoGame(ID_VideoGame)
 );
 /* 
