@@ -32,7 +32,7 @@ CREATE TRIGGER gamehub.after_update_AuditStockChange
 	FOR EACH ROW
 BEGIN
 	IF NEW.Stock <> OLD.Stock THEN
-		INSERT INTO StockAudit (ID_VideoGame, Fecha, StockAnterior, StockNuevo)
+		INSERT INTO StockAudit (ID_VideoGame, DateStUp, OldStock, NewStock)
 		VALUES (NEW.ID_VideoGame, NOW(), OLD.Stock, NEW.Stock);
 	END IF;
 END //
