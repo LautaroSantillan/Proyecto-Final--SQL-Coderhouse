@@ -22,6 +22,7 @@ CREATE TABLE StockAudit (
 DROP TRIGGER IF EXISTS gamehub.after_update_AuditStockChange;
 DROP TRIGGER IF EXISTS gamehub.after_insert_ReduceStockAfterOrderDetail;
 DROP TRIGGER IF EXISTS gamehub.after_delete_RestoreStockAfterOrderDeletion;
+DROP TRIGGER IF EXISTS gamehub.before_insert_CustomerEmail;
 
 --
 
@@ -57,6 +58,14 @@ BEGIN
     UPDATE VideoGame
     SET Stock = Stock + OLD.Quantity
     WHERE ID_VideoGame = OLD.ID_VideoGame;
+END //
+
+# Verificar si un email contiene @example y cambiarlo por @gmail.
+CREATE TRIGGER gamehub.before_insert_CustomerEmail
+	BEFORE INSERT ON Customer
+	FOR EACH ROW
+BEGIN
+    SET NEW.email = fn_ValidateEmail(NEW.email);
 END //
 
 DELIMITER ;

@@ -1,0 +1,17 @@
+ID_Customer;FirstName;LastName;DNI;Email;Location;Phone;ID_PaymentMethod
+11;Pedro;Gimenez;45221133;pedro.gimenez@example.com;Cordoba;1234-5678;2
+12;Valeria;Costa;45998321;valeria.costa@example.com;Mendoza;9876-5432;4
+13;Miguel;Torres;42123456;miguel.torres@example.com;Buenos Aires;3214-8765;3
+14;Carolina;Lopez;42678945;carolina.lopez@example.com;Salta;3456-7890;1
+15;Federico;Nieto;45123487;federico.nieto@example.com;San Juan;7865-3421;2
+16;Victoria;Morales;45332211;victoria.morales@example.com;La Plata;2233-1122;1
+17;Ignacio;Blanco;43115678;ignacio.blanco@example.com;Rosario;1144-2233;2
+18;Sofia;Paz;43124587;sofia.paz@example.com;Salta;9987-6677;3
+19;Emanuel;Vega;42129987;emanuel.vega@example.com;Córdoba;3345-5566;4
+20;Natalia;Suarez;45339988;natalia.suarez@example.com;Buenos Aires;5566-7788;5
+21;Matias;Ruiz;44118899;matias.ruiz@example.com;Rosario;9988-7766;3
+22;Julieta;Ponce;42439987;julieta.ponce@example.com;Salta;1123-4455;1
+23;Gonzalo;Mendez;43568912;gonzalo.mendez@example.com;Mendoza;2234-6677;2
+24;Florencia;Cruz;45236612;florencia.cruz@example.com;San Juan;3345-7788;3
+25;Martin;Rey;45129988;martin.rey@example.com;Buenos Aires;5567-8899;4
+26;Luciano;Mosquera;46124575;luciano.mosquera@example.com;Ushuaia;4564-5464;2

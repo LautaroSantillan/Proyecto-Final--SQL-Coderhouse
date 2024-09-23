@@ -30,13 +30,11 @@ BEGIN
     DECLARE totalPedidos INT;
     DECLARE descuento DECIMAL(10, 2);
 
-    -- Contar la cantidad de pedidos del cliente
     SELECT COUNT(*)
     INTO totalPedidos
     FROM `Order`
     WHERE ID_Customer = ID_Customer;
 
-    -- Si el cliente tiene más de 5 pedidos, aplicar un 10% de descuento
     IF totalPedidos > 5 THEN
         SET descuento =  MontoTotal * 0.90;
     ELSE
@@ -48,3 +46,20 @@ END //
 DELIMITER ;
 
 SELECT fn_CalculateVIPDiscount(1, 112.98) FROM DUAL;
+
+--
+
+DROP FUNCTION IF EXISTS fn_ValidateEmail;
+# Si el correo electrónico de un cliente contiene @example, lo reemplazará por @gmail.
+DELIMITER //
+CREATE FUNCTION fn_ValidateEmail(email_input VARCHAR(100))
+RETURNS VARCHAR(100)
+DETERMINISTIC
+BEGIN
+    IF email_input LIKE '%@example%' THEN
+        RETURN REPLACE(email_input, '@example', '@gmail');
+    ELSE
+        RETURN email_input;
+    END IF;
+END //
+DELIMITER ;

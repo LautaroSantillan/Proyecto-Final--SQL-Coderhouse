@@ -1,6 +1,34 @@
 #Creación de views en la DB
 USE gamehub;
+
 --
+
+SELECT * FROM gamehub.vw_ordersummary LIMIT 5;
+SELECT * FROM gamehub.vw_CustomerPayment;
+SELECT * FROM gamehub.vw_PendingOrders;
+SELECT * FROM gamehub.vw_CostsCustomer_and_PaymentMethod;
+
+--
+
+DROP VIEW IF EXISTS vw_ordersummary;
+# Mostar un top de clientes con mayores ventas acumuladas.
+CREATE VIEW vw_OrderSummary 
+AS
+	SELECT 
+		c.ID_Customer, 
+		CONCAT(c.FirstName, ' ', c.LastName) AS FullName,
+		SUM(o.TotalAmount) AS TotalSales
+	FROM Customer c
+	JOIN `Order` o ON c.ID_Customer = o.ID_Customer
+	WHERE o.State = 'Delivered'
+	GROUP BY 
+		c.ID_Customer, FullName
+	ORDER BY 
+		TotalSales DESC
+;
+
+--
+
 DROP VIEW IF EXISTS vw_CustomerPayment;
 # Visualizar los clientes junto con sus métodos de pago para informes de facturación o ventas.
 CREATE VIEW vw_CustomerPayment 
@@ -14,8 +42,6 @@ AS
 	FROM Customer c
 	JOIN PaymentMethod pm ON c.ID_PaymentMethod = pm.ID_PaymentMethod
 ;
-
-SELECT * FROM gamehub.vw_CustomerPayment;
 
 --
 
@@ -33,8 +59,6 @@ AS
 	JOIN Customer c ON o.ID_Customer = c.ID_Customer
 	WHERE o.State = 'Pending'
 ;
-
-SELECT * FROM gamehub.vw_PendingOrders;
 
 --
 
@@ -70,5 +94,3 @@ AS
         data_agrupada.ID_Customer,
         data_agrupada.PaymentMethod
 ;
-
-SELECT * FROM gamehub.vw_CostsCustomer_and_PaymentMethod;

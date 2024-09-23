@@ -8,7 +8,7 @@
 
 @Comision: 59410
 
-@Tutor: 
+@Tutor: Melina Solorzano
 
 @Docente: Anderson Michel Torres
 
@@ -114,4 +114,5 @@ GameHub es un ecommerce dedicado a la venta de videojuegos para diversas consola
 | NewStock         | INT         | Stock of the video game after audit.     |
 
 ## Estructura e ingesta de datos
-* Se realiza principalmente por medio del archivo population.sql
+* Se realiza inicialmente por medio del archivo population.sql
+* En una segunda insercion de datos, se realiza por medio de la importacion de archivos '.csv' a traves del asistente de Workbench MYSQL
