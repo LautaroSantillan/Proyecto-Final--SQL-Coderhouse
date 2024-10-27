@@ -116,3 +116,86 @@ GameHub es un ecommerce dedicado a la venta de videojuegos para diversas consola
 ## Estructura e ingesta de datos
 * Se realiza inicialmente por medio del archivo population.sql
 * En una segunda insercion de datos, se realiza por medio de la importacion de archivos '.csv' a traves del asistente de Workbench MYSQL
+
+## VIEWS 
+- **vw_OrderSummary**
+  - **Objetivo**: Mostrar un ranking de clientes basado en sus ventas acumuladas.
+  - **Descripción**: Combina `Customer` y `Order` para mostrar ventas totales por cliente con pedidos "Delivered", agrupando por ID y nombre completo.
+  - **Tablas involucradas**: `Customer`, `Order`.
+
+- **vw_CustomerPayment**
+  - **Objetivo**: Visualizar clientes y sus métodos de pago para facturación y ventas.
+  - **Descripción**: Muestra detalles de clientes junto al tipo de método de pago mediante unión de `Customer` y `PaymentMethod`.
+  - **Tablas involucradas**: `Customer`, `PaymentMethod`.
+
+- **vw_PendingOrders**
+  - **Objetivo**: Listar pedidos en estado "Pending".
+  - **Descripción**: Muestra pedidos pendientes junto con fecha, monto y cliente.
+  - **Tablas involucradas**: `Order`, `Customer`.
+
+- **vw_CostsCustomer_and_PaymentMethod**
+  - **Objetivo**: Informe mensual de costos totales por cliente y método de pago.
+  - **Descripción**: Resumen mensual de pedidos y costos por cliente y método de pago.
+  - **Tablas involucradas**: `Order`, `Customer`, `PaymentMethod`.
+
+## FUNCTIONS
+- **fn_TotalSalesByCustomer**
+  - **Objetivo**: Calcular ventas totales de un cliente.
+  - **Descripción**: Devuelve el total de ventas a partir del ID de cliente.
+  - **Tablas involucradas**: `Order`.
+
+- **fn_CalculateVIPDiscount**
+  - **Objetivo**: Aplicar un descuento del 10% en el total del pedido si el cliente tiene más de 5 pedidos.
+  - **Descripción**: Recibe el ID y total del pedido; aplica descuento si el cliente supera los 5 pedidos.
+  - **Tablas involucradas**: `Order`.
+
+- **fn_ValidateEmail**
+  - **Objetivo**: Validar formato del correo electrónico.
+  - **Descripción**: Reemplaza "@example" por "@gmail" si es necesario.
+  - **Tablas involucradas**: Ninguna.
+
+## STORED-PROCEDURES
+- **sp_UpdateOrderState**
+  - **Objetivo**: Actualizar el estado de un pedido.
+  - **Descripción**: Cambia el estado a "Pending" o "Delivered", validando el valor.
+  - **Tablas involucradas**: `Order`.
+
+- **sp_UpdateVideoGamePrice**
+  - **Objetivo**: Actualizar el precio de un videojuego.
+  - **Descripción**: Cambia el precio de un videojuego validando que sea mayor que el actual y mayor a cero.
+  - **Tablas involucradas**: `VideoGame`.
+
+## TRIGGERS
+- **after_update_AuditStockChange**
+  - **Objetivo**: Registrar cambios de stock en `StockAudit`.
+  - **Descripción**: Registra cambios de stock al actualizar un videojuego.
+  - **Tablas involucradas**: `VideoGame`, `StockAudit`.
+
+- **after_insert_ReduceStockAfterOrderDetail**
+  - **Objetivo**: Reducir stock tras la inserción de un `OrderDetail`.
+  - **Descripción**: Disminuye el stock del videojuego tras un nuevo pedido.
+  - **Tablas involucradas**: `OrderDetail`, `VideoGame`.
+
+- **after_delete_RestoreStockAfterOrderDeletion**
+  - **Objetivo**: Restaurar stock al eliminar un detalle de pedido.
+  - **Descripción**: Incrementa el stock del videojuego según la cantidad eliminada.
+  - **Tablas involucradas**: `OrderDetail`, `VideoGame`.
+
+- **before_insert_CustomerEmail**
+  - **Objetivo**: Validar el correo electrónico antes de insertar un cliente.
+  - **Descripción**: Reemplaza "@example" por "@gmail" si es necesario antes de insertar.
+  - **Tablas involucradas**: `Customer`.
+
+## USUARIOS Y TCL
+* Este proyecto incluye la configuración de usuarios en la base de datos gameHub, aplicando permisos específicos y revocaciones para asegurar distintos niveles de acceso a la información.
+
+1. **users-DCL.sql**: Este script crea y configura usuarios en GameHub.
+    - master: Usuario con permisos totales sobre todas las tablas, vistas y funciones.
+    - user1: Usuario con permisos de solo lectura en tablas seleccionadas, vistas específicas y funciones de la base de datos, que posteriormente son revocados y el usuario eliminado.
+
+2. **user1.sql**: 
+    - Contiene pruebas de transacciones y puntos de control (SAVEPOINT) para verificar la seguridad de datos. Se realizan consultas de selección sobre views y funciones específicas:
+    - Vista vw_OrderSummary: Consulta de las ventas acumuladas de clientes.
+    - Vista vw_CostsCustomer_and_PaymentMethod: Generación de un reporte de costos totales por cliente.
+    - Función fn_TotalSalesByCustomer: Cálculo del total de ventas de un cliente específico.
+    - Para la tabla stockaudit, se confirma la restricción de acceso en usuarios sin permisos de lectura.
